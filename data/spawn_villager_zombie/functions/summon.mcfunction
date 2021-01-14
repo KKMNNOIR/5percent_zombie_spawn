@@ -1,0 +1,9 @@
+execute as @e[type=minecraft:zombie] at @s unless score @s SummonedVillager = @s SummonedVillager run scoreboard players set @s SummonedVillager 0
+execute as @e[type=minecraft:zombie,scores={SummonedVillager=0},nbt=!{NoAI:1b}] at @s run loot spawn ~ ~ ~ loot spawn_villager_zombie:zombie_villager
+execute as @e[type=minecraft:zombie,scores={SummonedVillager=0},nbt=!{NoAI:1b}] at @s run scoreboard players set @s SummonedVillager 1
+execute as @e[type=minecraft:item,nbt={Item:{id:"minecraft:structure_void",tag:{Villager:1b,CustomModelData:9999}}}] at @s if entity @e[type=minecraft:zombie,distance=..1] run summon minecraft:zombie_villager
+execute as @e[type=minecraft:zombie_villager] at @s if entity @e[type=minecraft:zombie,scores={SummonedVillager=1},distance=..0.5] if entity @e[type=minecraft:item,nbt={Item:{id:"minecraft:structure_void",tag:{Villager:1b,CustomModelData:9999}}},distance=..0.5] run data modify entity @s {} merge from entity @e[type=minecraft:zombie,distance=..0.5,limit=1] {}
+execute as @e[type=minecraft:zombie_villager] at @s if entity @e[type=minecraft:zombie,scores={SummonedVillager=1},distance=..0.5] run data remove entity @s UUIDLeast
+execute as @e[type=minecraft:zombie_villager] at @s if entity @e[type=minecraft:zombie,scores={SummonedVillager=1},distance=..0.5] run data remove entity @s UUIDMost
+execute as @e[type=minecraft:item,nbt={Item:{id:"minecraft:structure_void",tag:{Villager:1b,CustomModelData:9999}}}] at @s if entity @e[type=minecraft:zombie,distance=..1] run data merge entity @s {Age:5999}
+execute as @e[type=minecraft:zombie,scores={SummonedVillager=1}] at @s if entity @e[type=minecraft:item,nbt={Item:{id:"minecraft:structure_void",tag:{Villager:1b,CustomModelData:9999}}},distance=..0.5] run tp ~ -400 ~
