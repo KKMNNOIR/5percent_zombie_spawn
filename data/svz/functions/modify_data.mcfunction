@@ -4,5 +4,5 @@
  #
  # Created by .
 ##
-data modify entity @s {} set from storage svz:zombie_data {}
+data modify entity @s {} merge from entity @e[type=zombie,tag=summonDone,distance=..2,limit=1]
 data remove entity @s UUID
